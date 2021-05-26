@@ -2,16 +2,31 @@
 pool:
   vmImage: 'macOS-10.14'
 variables:
-  scheme: ''
+  scheme: 'rnfirstapp.xcscheme'
   sdk: 'iphoneos'
   configuration: 'Release'
 
 steps:
 - task: Xcode@5
   inputs:
-    sdk: '$(sdk)'
+    sdk: '$(sdk)'  
+    xcWorkspacePath: 'ios/rnfirstapp.xcworkspace' # Optional
     scheme: '$(scheme)'
     configuration: '$(configuration)'
     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
-    exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
     packageApp: false
+
+
+- script: /usr/local/bin/pod install
+  displayName: 'pod install using a script'
+  
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+  
+- task: CocoaPods@0
+  inputs:
+    forceRepoUpdate: true
+    projectDirectory: '$(system.defaultWorkingDirectory)'
+  displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
+
+

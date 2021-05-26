@@ -81,3 +81,7 @@ Issues:
 
 
 ```
+
+# How to build ios project with Xcode task using microsoft-hosted macOS agent 
+https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/xcode?view=azure-devops
+
