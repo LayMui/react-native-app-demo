@@ -26,6 +26,8 @@ https://appiumpro.com/editions/76-testing-react-native-apps-with-appium
 # Build ipa artefact
 https://medium.com/easyread/build-react-native-ipa-apk-using-cli-simple-ci-cd-2b8303d079e0
 
+https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-HOW_DO_I_ARCHIVE_AND_EXPORT_MY_APP_FOR_DISTRIBUTION_
+
 gem install xcpretty
 
 cd ios

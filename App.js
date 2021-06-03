@@ -56,7 +56,7 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: {
     padding: 50,
-    backgroundColor: 'red'
+    //backgroundColor: 'red' // to introduce a visual bug
   },
   inputContainer: {
    flexDirection: 'row',
