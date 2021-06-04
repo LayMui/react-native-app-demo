@@ -14,11 +14,13 @@ steps:
     configuration: '$(configuration)'
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
-    exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
+   # exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
     packageApp: false
 
 - task: CmdLine@2
   inputs:
-    script: pod install 
+    script: | 
+    pod install 
+    xcodebuild clean archive -workspace rnfirstapp.xcworkspace -scheme "rnfirstapp" -archivePath rnfirstapp.xcarchive
     #workingDirectory: # Optional
     #failOnStderr: false # Optional
