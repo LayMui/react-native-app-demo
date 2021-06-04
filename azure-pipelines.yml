@@ -17,14 +17,8 @@ steps:
     exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
     packageApp: false
 
-- script: /usr/local/bin/pod install
-  displayName: 'pod install using a script'
-
-- task: CocoaPods@0
-  displayName: 'pod install using the CocoaPods task with defaults'
-
-- task: CocoaPods@0
+- task: CmdLine@2
   inputs:
-    forceRepoUpdate: true
-    projectDirectory: '$(system.defaultWorkingDirectory)'
-  displayName: 'pod install using the CocoaPods task with a forced repo update and a custom project directory'
+    script: pod install 
+    #workingDirectory: # Optional
+    #failOnStderr: false # Optional
