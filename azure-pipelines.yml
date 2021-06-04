@@ -11,6 +11,7 @@ steps:
   inputs:
     sdk: '$(sdk)'
     scheme: '$(scheme)'
+    xcWorkspacePath: '**/*.xcworkspace'
     configuration: '$(configuration)'
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
