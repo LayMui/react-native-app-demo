@@ -19,7 +19,5 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: | 
-    pod install 
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
-    
+    script: pod install
