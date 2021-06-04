@@ -21,3 +21,8 @@ steps:
   inputs:
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     script: pod install
+
+- task: CmdLine@2
+  inputs:
+    workingDirectory: '$(Build.Repository.LocalPath)/ios'
+    script: xcodebuild clean archive -workspace rnfirstapp.xcworkspace -scheme "rnfirstapp" -archivePath rnfirstapp.xcarchive
