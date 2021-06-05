@@ -11,11 +11,12 @@ steps:
   inputs:
     sdk: '$(sdk)'
     scheme: '$(scheme)'
+    actions: 'clean archive'
     archivePath: 'rnfirstapp.xcarchive'
     xcWorkspacePath: '**/*.xcworkspace'
     configuration: '$(configuration)'
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
-    xcodeVersion: 12.3' # Options: default, 10, 9, 8, specifyPath
+    xcodeVersion: '12' # Options: default, 10, 9, 8, specifyPath
     exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
     packageApp: false
 
