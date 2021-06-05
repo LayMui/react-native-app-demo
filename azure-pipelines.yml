@@ -16,7 +16,7 @@ steps:
     xcWorkspacePath: '**/*.xcworkspace'
     configuration: '$(configuration)'
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
-    xcodeVersion: '12' # Options: default, 10, 9, 8, specifyPath
+    xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
     exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
     packageApp: false
 
