@@ -25,8 +25,8 @@ steps:
     configuration: '$(configuration)'
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
-    exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
-    packageApp: false
+  #  exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
+    packageApp: true
 
 # - task: CmdLine@2
 #   inputs:
