@@ -31,10 +31,16 @@ https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple
 gem install xcpretty
 
 cd ios
-xcodebuild clean archive -workspace rnfirstapp.xcworkspace -scheme "rnfirstapp" -archivePath rnfirstapp.xcarchive
+1. pod install
+2. xcodebuild clean archive -workspace rnfirstapp.xcworkspace -scheme "rnfirstapp" -archivePath rnfirstapp.xcarchive
      
-xcodebuild -exportArchive -archivePath rnfirstapp.xcarchive -exportPath rnfirstapp -exportOptionsPlist ExportOptions.plist | xcpretty
+3. xcodebuild -exportArchive -archivePath rnfirstapp.xcarchive -exportPath rnfirstapp -exportOptionsPlist ExportOptions.plist |xcpretty
 
+Command #3 will export rn-first-app.ipa at subfolder rnfirstapp 
+➜  rnfirstapp git:(master) ✗ ls
+AppDelegate.h             Images.xcassets           main.m
+AppDelegate.m             Info.plist                rn-first-app.entitlements
+Base.lproj                Packaging.log             rn-first-app.ipa
 # Integrate to Azure DevOps pipeline
 https://medium.com/@liam.e.andrew/continuous-integration-for-react-native-with-azure-pipelines-245d90948f6a
 
