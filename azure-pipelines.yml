@@ -11,9 +11,9 @@ steps:
   inputs:
     versionSpec: '14.x'
     checkLatest: true
-- task: Npm@1
-  inputs:
-    command: 'install'
+- task: Npm@1
+  inputs:
+    command: 'install'
     verbose: true
 # CocoaPods
 # Install CocoaPods dependencies for Swift and Objective-C Cocoa projects
