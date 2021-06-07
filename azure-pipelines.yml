@@ -14,7 +14,7 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    verbose: true
+ 
 # CocoaPods
 # Install CocoaPods dependencies for Swift and Objective-C Cocoa projects
 - task: CocoaPods@0
