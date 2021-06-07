@@ -7,10 +7,6 @@ variables:
   configuration: 'Release'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '14.x'
-    checkLatest: true
 - task: Npm@1
   inputs:
     command: 'install'
