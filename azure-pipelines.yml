@@ -22,6 +22,17 @@ steps:
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     forceRepoUpdate: true
     #projectDirectory: # Optional
+- task: DownloadSecureFile@1
+  name: caCertificate
+  displayName: 'Download CA certificate'
+  inputs:
+    secureFile: 'Certificates_ios.p12'
+
+- script: |
+    echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
+    sudo chown root:root $(caCertificate.secureFilePath)
+    sudo chmod a+r $(caCertificate.secureFilePath)
+    sudo ln -s -t /etc/ssl/certs/ $(caCertificate.secureFilePath)
 - task: Xcode@5
   inputs:
     sdk: '$(sdk)'
