@@ -4,12 +4,11 @@ pool:
   workspace:
     clean: all
 variables:
-  scheme: 'rnfirstapp'
-  sdk: 'iphoneos'
-  configuration: 'Release'
-  variables:
-    - group: React Native Variables
-
+  - group: React Native Variables
+    scheme: 'rnfirstapp'
+    sdk: 'iphoneos'
+    configuration: 'Release'
+  
 steps:
 - task: UseRubyVersion@0
   inputs:
