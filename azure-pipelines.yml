@@ -58,11 +58,11 @@ steps:
      deleteCert: true
   displayName: Install Apple Certificates
 
-- task: InstallAppleProvisioningProfile@1
-  inputs:
-     provisioningProfileLocation: 'secureFiles'
-     provProfileSecureFile: 'certification_ios_poc.mobileprofile'
-  displayName: 'Install Apple Provisioning Profile'
+# - task: InstallAppleProvisioningProfile@1
+#   inputs:
+#      provisioningProfileLocation: 'secureFiles'
+#      provProfileSecureFile: 'certification_ios_poc.mobileprofile'
+#   displayName: 'Install Apple Provisioning Profile'
 
 - task: Xcode@5
   inputs:
