@@ -74,12 +74,15 @@ steps:
     configuration: '$(configuration)'
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
-    teamId: 'UY688SHM4H'
+    teamId: $(TEAMID)
     exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
     exportOptionsPlist: '$(Build.Repository.LocalPath)/ios/ExportOptions.plist'
-    exportTeamId: 'UY688SHM4H'
+    exportTeamId: $(TEAMID)
     useXcpretty: true
     packageApp: true
+  env:
+    TEAMID: $(TEAMID)
+     
 
 - task: CopyFiles@2
   inputs:
