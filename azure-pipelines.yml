@@ -74,10 +74,10 @@ steps:
     configuration: '$(configuration)'
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
-    teamId: $(TEAMID)
+    teamId: 'UY688SHM4H'
     exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
     exportOptionsPlist: '$(Build.Repository.LocalPath)/ios/ExportOptions.plist'
-    exportTeamId: $(TEAMID)
+    exportTeamId: 'UY688SHM4H'
     useXcpretty: true
     packageApp: true
 
