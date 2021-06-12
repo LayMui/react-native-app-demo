@@ -7,6 +7,8 @@ variables:
   scheme: 'rnfirstapp'
   sdk: 'iphoneos'
   configuration: 'Release'
+  variables:
+    - group: React Native Variables
 
 steps:
 - task: UseRubyVersion@0
@@ -46,29 +48,20 @@ steps:
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     forceRepoUpdate: true
     #projectDirectory: # Optional
-- task: DownloadSecureFile@1
-  name: caCertificate
-  displayName: 'Download CA certificate'
-  inputs:
-    secureFile: 'AppleCertification_12June.p12'
-
-- script: |
-    echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
-    sudo chown root:root $(caCertificate.secureFilePath)
-    sudo chmod a+r $(caCertificate.secureFilePath)
-    sudo ln -s -t /etc/ssl/certs/ $(caCertificate.secureFilePath)
-# Install Apple certificate
-# Install an Apple certificate required to build on a macOS agent machine
 - task: InstallAppleCertificate@2
   inputs:
-    certSecureFile: 
-    #certPwd: # Optional
-    #keychain: 'temp' # Options: default, temp, custom
-    #keychainPassword: # Required when keychain == Custom || Keychain == Default
-    #customKeychainPath: # Required when keychain == Custom
-    #deleteCert: # Optional
-    #deleteCustomKeychain: # Optional
-    #signingIdentity: # Optional
+     certSecureFile: AppleCertification_12June.p12
+     certPwd: $(P12password)
+     keychain: 'temp'
+     deleteCert: true
+  displayName: Install Apple Certificate
+
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+     provisioningProfileLocation: 'secureFiles'
+     provProfileSecureFile: 'certification_ios_poc.developerprofile'
+  displayName: 'Install Apple Provisioning Profile'
+
 - task: Xcode@5
   inputs:
     sdk: '$(sdk)'
