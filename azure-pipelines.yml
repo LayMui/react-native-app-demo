@@ -5,9 +5,12 @@ pool:
     clean: all
 variables:
   - group: React Native Variables
-    scheme: 'rnfirstapp'
-    sdk: 'iphoneos'
-    configuration: 'Release'
+  - name: scheme
+    value: 'rnfirstapp'
+  - name: sdk
+    value: 'iphoneos'
+  - name: configuration
+    value: 'Release'
   
 steps:
 - task: UseRubyVersion@0
