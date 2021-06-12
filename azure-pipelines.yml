@@ -1,27 +1,63 @@
 # https://docs.microsoft.com/azure/devops/pipelines/ecosystems/xcode
 pool:
-  vmImage: 'macOS-10.14'
+  vmImage: 'macOS-latest'
+  workspace:
+    clean: all
 variables:
   scheme: 'rnfirstapp'
   sdk: 'iphoneos'
   configuration: 'Release'
 
 steps:
-- task: NodeTool@0
+- task: UseRubyVersion@0
   inputs:
-    versionSpec: '14.x'
-    checkLatest: true
-- task: Npm@1
+    versionSpec: '>= 2.4'
+- task: Bash@3
   inputs:
-    command: 'install'
- 
+    targetType: 'inline'
+    script: |
+      gem cleanup
+      gem install xcpretty
+      gem install --no-document bundler
+      bundle update --bundler
+      bundle install --retry=3 --jobs=4
+      gem install fastlane
+
+- task: NodeTool@0 
+  inputs:
+    versionSpec: '12.x'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: npm install
+    workingDirectory: '$(Build.Repository.LocalPath)'
+
 # CocoaPods
 # Install CocoaPods dependencies for Swift and Objective-C Cocoa projects
-- task: CocoaPods@0
+- task: Bash@3
   inputs:
+    targetType: 'inline'
+    script:  |
+     pod deintegrate
+     gem install cocoapods
+     pod install
+     pod --version
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
-    forceRepoUpdate: true
-    #projectDirectory: # Optional
+
+#- task: InstallAppleCertificate@2
+#  inputs:
+#    certSecureFile: AppleDeveloperCertificate.p12
+#    certPwd: $(P12password)
+#    keychain: 'temp'
+#    deleteCert: true
+#  displayName: Install Apple Certificate
+#- task: InstallAppleProvisioningProfile@1
+#  inputs:
+#    provisioningProfileLocation: 'secureFiles'
+#    provProfileSecureFile: 'AppleProvisioningProfile.mobileprovision'
+#  displayName: 'Install Apple Provisioning Profile'
+
 - task: Xcode@5
   inputs:
     sdk: '$(sdk)'
@@ -33,17 +69,17 @@ steps:
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
     teamId: $(TEAMID)
-    provisioningProfileUuid: $(PROFILEID)
-    provisioningProfileName: $(PROFILENAME)
     exportPath: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
+    exportOptionsPlist: '$(Build.Repository.LocalPath)/ios/ExportOptions.plist'
+    exportTeamId: $(TEAMID)
+    useXcpretty: true
     packageApp: true
 
-# - task: CmdLine@2
-#   inputs:
-#     workingDirectory: '$(Build.Repository.LocalPath)/ios'
-#     script: pod install
-
-# - task: CmdLine@2
-#   inputs:
-#     workingDirectory: '$(Build.Repository.LocalPath)/ios'
-#     script: xcodebuild clean archive -workspace rnfirstapp.xcworkspace -scheme "rnfirstapp" -archivePath rnfirstapp.xcarchive
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: '$(agent.buildDirectory)/output/$(sdk)/$(configuration)'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
