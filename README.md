@@ -37,13 +37,22 @@ cd ios
 3. xcodebuild -exportArchive -archivePath rnfirstapp.xcarchive -exportPath rnfirstapp -exportOptionsPlist ExportOptions.plist |xcpretty
 
 Command #3 will export rn-first-app.ipa at subfolder rnfirstapp 
+
 ➜  rnfirstapp git:(master) ✗ ls
+
 AppDelegate.h             Images.xcassets           main.m
 AppDelegate.m             Info.plist                rn-first-app.entitlements
 Base.lproj                Packaging.log             rn-first-app.ipa
 # Integrate to Azure DevOps pipeline
 https://medium.com/@liam.e.andrew/continuous-integration-for-react-native-with-azure-pipelines-245d90948f6a
 
+# Setup required:
+1. AppleDeveloperCertificate (including the password) 
+2. The provisioning profile
+Issue: line 64 of azure-pipelines.yml on mobileprovision file
+```
+There was a resource authorization issue: "The pipeline is not valid. Job Job: Step InstallAppleProvisioningProfile input provProfileSecureFile references secure file certification_ios_poc.mobileprofile which could not be found. The secure file does not exist or has not been authorized for use. For authorization details, refer to https://aka.ms/yamlauthz."
+```
 # How to setup self hosted agent in azure pipeline
 ```
 I found the following command which can enable "Allow apps downloaded from Anywhere".
