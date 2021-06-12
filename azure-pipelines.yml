@@ -56,12 +56,12 @@ steps:
      certPwd: $(P12password)
      keychain: 'temp'
      deleteCert: true
-  displayName: Install Apple Certificate
+  displayName: Install Apple Certificates
 
 - task: InstallAppleProvisioningProfile@1
   inputs:
      provisioningProfileLocation: 'secureFiles'
-     provProfileSecureFile: 'certification_ios_poc.developerprofile'
+     provProfileSecureFile: 'certification_ios_poc.mobileprofile'
   displayName: 'Install Apple Provisioning Profile'
 
 - task: Xcode@5
