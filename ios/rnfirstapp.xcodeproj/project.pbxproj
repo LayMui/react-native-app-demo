@@ -151,7 +151,7 @@
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = UY688SHM4H;
+						DevelopmentTeam = 47BAAVYY24;
 						LastSwiftMigration = 1120;
 					};
 				};
@@ -279,7 +279,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "rnfirstapp/rn-first-app.entitlements";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UY688SHM4H;
+				DEVELOPMENT_TEAM = 47BAAVYY24;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -309,7 +309,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "rnfirstapp/rn-first-app.entitlements";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UY688SHM4H;
+				DEVELOPMENT_TEAM = 47BAAVYY24;
 				INFOPLIST_FILE = rnfirstapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

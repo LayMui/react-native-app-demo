@@ -1,0 +1,74 @@
+# https://docs.microsoft.com/azure/devops/pipelines/ecosystems/xcode
+pool:
+  vmImage: 'macOS-latest'
+  workspace:
+    clean: all
+variables:
+  scheme: 'rnfirstapp'
+  sdk: 'iphoneos'
+  configuration: 'Debug'
+
+steps:
+- task: UseRubyVersion@0
+  inputs:
+    versionSpec: '>= 2.4'
+
+- task: NodeTool@0 
+  inputs:
+    versionSpec: '12.x'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: npm install
+    workingDirectory: '$(Build.Repository.LocalPath)'
+
+# CocoaPods
+# Install CocoaPods dependencies for Swift and Objective-C Cocoa projects
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script:  |
+     pod deintegrate
+     gem install cocoapods
+     pod install
+     pod --version
+    workingDirectory: '$(Build.Repository.LocalPath)/ios'
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'CertificatesFDL.p12'
+    certPwd: $(caPassword)
+  displayName: Install Apple Certificate
+
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'ppfdlmsfttwo.mobileprovision'
+  displayName: Install Provision Profile
+
+- task: Xcode@5
+  inputs:
+    sdk: '$(sdk)'
+    scheme: '$(scheme)'
+    signingOption: 'manual'
+    actions: 'clean archive'
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+    provisioningProfileName: 'ppfdlmsfttwo'
+    xcWorkspacePath: '**/*.xcworkspace'
+    configuration: '$(configuration)'
+    workingDirectory: '$(Build.Repository.LocalPath)/ios'
+    xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
+    exportPath: '$(Build.ArtifactStagingDirectory)'
+    exportOptions: 'plist'
+    exportOptionsPlist: '$(Build.Repository.LocalPath)/ios/ExportOptions.plist'
+    useXcpretty: true
+    packageApp: true
+    teamId: 'M952V9PB5P'
+    exportTeamId: 'M952V9PB5P'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
