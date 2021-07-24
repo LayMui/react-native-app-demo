@@ -50,13 +50,13 @@ steps:
     workingDirectory: '$(Build.Repository.LocalPath)/ios'
     forceRepoUpdate: true
     #projectDirectory: # Optional
-- task: InstallAppleCertificate@2
-  inputs:
-     certSecureFile: AppleCertification_12June.p12
-     certPwd: $(P12password)
-     keychain: 'temp'
-     deleteCert: true
-  displayName: Install Apple Certificates
+# - task: InstallAppleCertificate@2
+#   inputs:
+#      certSecureFile: AppleCertification_12June.p12
+#      certPwd: $(P12password)
+#      keychain: 'temp'
+#      deleteCert: true
+#   displayName: Install Apple Certificates
 
 # - task: InstallAppleProvisioningProfile@1
 #   inputs:
